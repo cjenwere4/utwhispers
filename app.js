@@ -2,7 +2,7 @@ var express = require('express');
 var bodyparser = require('body-parser');
 var mongoose = require('mongoose'); 
 var urlencodedParser = bodyparser.urlencoded({extended: true});
-mongoose.connect('mongodb+srv://cjenwere:021399@utwhispers-j9ky1.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://cjenwere:021399@utwhispers-j9ky1.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 var chatSchema = new mongoose.Schema({
     msg: String,
     likes: Number,
