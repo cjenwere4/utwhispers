@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Say anything you want, how you want, whenever you want, anonymously.">
+        <meta name="keywords" content="UT Austin, utwhispers,">
+        <meta name="author" content="COK3 Inc.">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="assets/msgfav.png"/>
+    </head>
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="/assets/chat.js"></script>    
+    <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <body>
+        <div id = "top"><h1 id = "title">UT Whispers</h1></div>
+        <div id = "main">
+            <div class="search-box">
+                <form action="/" method="POST">
+                    <i class="fa fa-comments"></i>
+                    <input id = "changelater" type="search" placeholder = "Say something... (100 character limit)" maxlength="100"> 
+                </form>
+                <!-- may have to add the submit input button back, so uncomment
+                <input type="submit" value="Submit"> 
+                -->
+                <br>
+            </div>
+        </div>
+        <div id="loadingmask">
+            <div class="lds-facebook"><div></div><div></div><div></div></div>
+        </div>
+        <section class="discussion scroll scrollbar animate-bottom" id="style-3">
+            <% for(var i = chats.length - 1; i >= 0; i--) { %> <!-- earlier chats go first-->
+                <% if (i % 2 == 0) { %>
+                    <div class="bubble recipient first">
+                        <li class = "display"><%= chats[i].msg %> &nbsp; &nbsp;
+                            <i class="fas fa-heart" aria-hidden="true"></i> <sub><%=chats[i].likes%></sub>
+                            <input type="hidden" id = "changeit" class = "likebutton" value = "<%=chats[i].likes%>" > 
+                            <input type="hidden" class = "hiddentag" value="<%=chats[i].msg%>"> <!-- needed to get the message that was liked-->
+                            <input type="hidden" class = "hiddendatetag" value="<%=chats[i].date%>"> <!-- needed to filter messages that are the same-->
+                        </li>
+                        <br>
+                        <span>Sent: <%= chats[i].date%> </span>
+                    </div>
+                <% } else { %>
+                    <div class="bubble sender first">
+                        <li class = "display"><%= chats[i].msg %> &nbsp; &nbsp;
+                            <i class="fas fa-heart"aria-hidden="true"></i> <sub><%=chats[i].likes%></sub>
+                            <input type="hidden" id = "changeit" class = "likebutton fas fa-heart" value = "<%=chats[i].likes%>" > 
+                            <input type="hidden" class = "hiddentag" value="<%=chats[i].msg%>"> <!-- needed to get the message that was liked-->
+                            <input type="hidden" class = "hiddendatetag" value="<%=chats[i].date%>"> <!-- needed to filter messages that are the same-->
+                        </li>
+                        <br>
+                        <span>Sent: <%= chats[i].date%> </span>
+                    </div>
+                <% } %>
+            <% } %>
+        </section>
+        <footer>
+            <p id = "info">Questions? Contact Us at utwhispers@protonmail.com</p> <!-- change this to a form-->
+        </footer>
+    </body>
+</html>
