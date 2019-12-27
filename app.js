@@ -12,10 +12,10 @@ var chats = mongoose.model('Chat', chatSchema);
 mongoose.set('useFindAndModify', false);
 // set up an express app, gives us all functions of express
 var app = express();
-app.listen(42069);
+app.listen(8081);
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
-console.log("Listening to port 42069");
+console.log("Listening to port 8081");
 app.get('/', function(req, res){ // express has extended these fucntion
     console.log("app.get");
     setInterval(deleteDailyChats, 86400000, chats); // all chats will delete after 24 hours
