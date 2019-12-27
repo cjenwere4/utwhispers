@@ -1,10 +1,7 @@
 $(document).ready(function(){
   document.title = "UT Whispers - Say anything you want, how you want, whenever you want, anonymously."; // set title
-  $('section').hide(); // hide section for loading
-  $('#loadingmask').fadeOut(750, function(){ 
-      $(this).remove(); 
-      $('section').show(); // show section after loading
-  });
+  var messageBody = document.querySelector('section'); 
+  messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight; // keeps scroll bar at the bottom
   $('form').on('submit', function(){ // hit submit
       var item = $('form input');
       var d = new Date($.now()); // i mainly this for post that are same content but different times, for the liking
@@ -13,8 +10,8 @@ $(document).ready(function(){
         datefull = datefull + "0"+ d.getMinutes();
       else 
         datefull = datefull + d.getMinutes();
-      var chat = {msg: item.val(), likes: '', date: datefull}; //intially the post will have 0 likes    
-      console.log("chat", chat);
+      var msgsec = d.getSeconds(); // for post identification?
+      var chat = {msg: item.val(), likes: '', date: datefull, seconds: msgsec}; //intially the post will have 0 likes    
       $.ajax({
         type: 'POST',
         url: '/',

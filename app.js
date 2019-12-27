@@ -6,7 +6,8 @@ mongoose.connect('mongodb+srv://cjenwere:021399@utwhispers-j9ky1.mongodb.net/tes
 var chatSchema = new mongoose.Schema({
     msg: String,
     likes: Number,
-    date: String
+    date: String,
+    seconds: Number
 });
 var chats = mongoose.model('Chat', chatSchema);
 mongoose.set('useFindAndModify', false);
@@ -17,6 +18,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('./public'));
 console.log("Listening to port 8081");
 app.get('/', function(req, res){ // express has extended these fucntion
+    res.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict"); // get rid of annoying google message
     console.log("app.get");
     setInterval(deleteDailyChats, 86400000, chats); // all chats will delete after 24 hours
     // deleteDailyChats(chats); //delete chats manually
