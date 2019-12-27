@@ -31,6 +31,7 @@ app.get('/', function(req, res){ // express has extended these fucntion
     })
 });
 app.post('/', urlencodedParser, function(req, res){
+    res.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict"); // get rid of annoying google message
     var numlikes;
     console.log("app.post");
     if (req.body.msg.length <= 0)
