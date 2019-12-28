@@ -94,7 +94,6 @@ html {
 .discussion {
 	max-width: 600px;
 	margin: 0 auto;
-	
 	display: flex;
 	flex-flow: column;
 }
@@ -181,4 +180,25 @@ span {
   @keyframes animatebottom { 
     from{ bottom:-100px; opacity:0 } 
     to{ bottom:0; opacity:1 }
+  }
+  
+  @media only screen and (max-width: 500px) {
+    .formobile {
+        overflow-x: hidden;
+    }
+    #title {
+        font-size: 45px;
+    }
+    .discussion {
+        padding-left: 5px;
+        display: block;
+    }
+    section {
+        text-align: center;
+    }
+    .discussion > .bubble {
+        margin: 1em;
+        max-height: 80px;
+        max-width: 50%;
+    }
   }
