@@ -17,6 +17,9 @@ li {
 }
 body {
     background-color: black;
+    /* may have to get rid of this, if any problems arise */
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 form{
     position: relative;
@@ -76,7 +79,7 @@ form:hover .fa{
     background: #07051a;
     color: white;
 }
-::placeholder, input[type="search"] {
+::placeholder, input[type="search"], input[type ="text"] {
     font-family: 'Encode Sans Semi Condensed', sans-serif;
 }
 footer {
@@ -181,7 +184,61 @@ span {
     from{ bottom:-100px; opacity:0 } 
     to{ bottom:0; opacity:1 }
   }
+  .pages {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: none;
+  }
+  .page {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+  }
   
+  /* Login Page */
+  
+  .login.page {
+    background-color: #000;
+  }
+  
+  .login.page .form {
+    height: 100px;
+    margin-top: -100px;
+    position: absolute;
+  
+    text-align: center;
+    top: 50%;
+    width: 100%;
+  }
+  
+  .login.page .form .usernameInput {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #fff;
+    outline: none;
+    padding-bottom: 15px;
+    text-align: center;
+    width: 400px;
+  }
+  
+  .login.page .title {
+    font-size: 200%;
+  }
+  
+  .login.page .usernameInput {
+    font-size: 100%;
+  }
+  
+  .login.page .title, .login.page .usernameInput {
+    color: #fff;
+    font-weight: 100;
+  }
+  
+  
+  
+  /* Media Query */
   @media only screen and (max-width: 500px) {
     .formobile {
         overflow-x: hidden;

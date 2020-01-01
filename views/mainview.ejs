@@ -17,6 +17,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div class="formobile">
         <body>
+            <ul class="pages">
+                <li class="login page">
+                  <div class="form">
+                    <input class="usernameInput" type="text" placeholder = "Reply to this chat (50 characters max)" maxlength="50" />
+                  </div>
+                </li>
+            </ul>
             <div id = "top"><h1 id = "title">UT Whispers</h1></div>
             <div id = "main">
                 <div class="search-box">
@@ -35,7 +42,8 @@
                     <% if (i % 2 == 0) { %>
                         <div class="bubble recipient first animate-bottom">
                             <li class = "display"><%= chats[i].msg %> &nbsp; &nbsp;
-                                <i class="fas fa-heart" aria-hidden="true"></i> <sub><%=chats[i].likes%></sub>
+                                <i class="fas fa-heart liked" aria-hidden="true"></i> <sub><%=chats[i].likes%></sub> &nbsp; &nbsp; &nbsp; &nbsp;
+                                <i class="fa fa-reply reply"></i>
                                 <input type="hidden" id = "changeit" class = "likebutton" value = "<%=chats[i].likes%>" > 
                                 <input type="hidden" class = "hiddentag" value="<%=chats[i].msg%>"> <!-- needed to get the message that was liked-->
                                 <input type="hidden" class = "hiddendatetag" value="<%=chats[i].date%>"> <!-- needed to filter messages that are the same-->
@@ -46,7 +54,8 @@
                     <% } else { %>
                         <div class="bubble sender first animate-bottom">
                             <li class = "display"><%= chats[i].msg %> &nbsp; &nbsp;
-                                <i class="fas fa-heart"aria-hidden="true"></i> <sub><%=chats[i].likes%></sub>
+                                <i class="fas fa-heart liked" aria-hidden="true"></i> <sub><%=chats[i].likes%></sub> &nbsp; &nbsp; &nbsp; &nbsp;
+                                <i class="fa fa-reply reply"></i>
                                 <input type="hidden" id = "changeit" class = "likebutton fas fa-heart" value = "<%=chats[i].likes%>" > 
                                 <input type="hidden" class = "hiddentag" value="<%=chats[i].msg%>"> <!-- needed to get the message that was liked-->
                                 <input type="hidden" class = "hiddendatetag" value="<%=chats[i].date%>"> <!-- needed to filter messages that are the same-->

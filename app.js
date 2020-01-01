@@ -2,12 +2,13 @@ var express = require('express');
 var bodyparser = require('body-parser');
 var mongoose = require('mongoose'); 
 var urlencodedParser = bodyparser.urlencoded({extended: true});
-mongoose.connect('mongodb+srv://cjenwere:021399@utwhispers-j9ky1.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://test:021399af23@cluster0-sv63o.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 var chatSchema = new mongoose.Schema({
     msg: String,
     likes: Number,
     date: String,
-    seconds: Number
+    seconds: Number,
+    replies: Array
 });
 var chats = mongoose.model('Chat', chatSchema);
 mongoose.set('useFindAndModify', false);
@@ -33,10 +34,10 @@ app.get('/', function(req, res){ // express has extended these fucntion
 app.post('/', urlencodedParser, function(req, res){
     res.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict"); // get rid of annoying google message
     var numlikes;
-    console.log("app.post");
-    if (req.body.msg.length <= 0)
+    console.log("app.post");    
+    if (req.body.msg !== undefined && req.body.msg.length <= 0)
         console.log("you didn't input a message");
-    else if (req.body.likes == '') { // user just submited a post
+    else if (req.body.likes !== undefined && req.body.likes == '') { // user just submited a post
         req.body.likes = 0;
         var newChat = chats(req.body).save(function(err, data){ // save new data
             if (err) {
@@ -47,7 +48,7 @@ app.post('/', urlencodedParser, function(req, res){
             console.log("saved");
         
         });
-    } else if (req.body.likes == -1) { // user just liked a post
+    } else if (req.body.likes !== undefined && req.body.likes == -1) { // user just liked a post
         console.log("user just liked a post.");
         chats.find({msg: req.body.msg, date: req.body.date}, function(err, data) { // find liked post
             if (err) throw err; // crash
@@ -66,6 +67,28 @@ app.post('/', urlencodedParser, function(req, res){
             );
             res.json(data);
         }); 
+    } else if (req.body.reply !== undefined){
+        // console.log("reply logged.");
+        // console.log("reply msg:" + req.body.reply);
+        chats.find({msg: req.body.msg, date: req.body.date}, function(err, data) { // find liked post
+            if (err) throw err; // crash
+            // find current likes
+            var replyarray = data[0].replies; // leave the [0] for now
+            replyarray[replyarray.length] = req.body.reply;
+            console.log("length of array: " + replyarray.length);
+            
+            chats.findOneAndUpdate( // update current likes
+                { "msg": req.body.msg , "date": req.body.date}, {"$set": { "replies": replyarray }},
+                function(err,doc) {                    
+                    if (err) {
+                        console.log("error when updating");
+                        throw err;
+                    }                    
+                }
+            );
+            res.json(data); // ?
+        }); 
+        
     }
 });
 
