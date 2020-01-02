@@ -66,14 +66,16 @@ $(document).ready(function(){
       $('section, #main, #top, footer').hide();
       $(".pages").fadeIn(400); // show reply 
       
-      // TO DO ADD: ON CLICK OF THE REPLY THING IT WILL EXIT.
-      $(".pages:not(div)").on('click', function(e){
-        console.log("user clicked to exit");
-        $(".pages").fadeOut(400); // remove reply box
-        $('section, #main, #top, footer').show();
+      $(".pages").on("click", function(e) {        
+        if (!$(e.target) // get the clicked element
+            .hasClass("usernameInput") // check if any of them have the usernameInput class and return the opposite with the !
+        ) {
+          $(".pages").fadeOut(400); // fadeOut if they don't contain the class name.
+          $("section, #main, #top, footer").show();
+        } 
       });
       
-      $('input').keypress(function(e){
+      $('input').bind("keypress.key13", function(e) {
         if (e.which === 13) { // capture enter
           var input = $('input').val();
           if (input !== "") {
@@ -82,7 +84,7 @@ $(document).ready(function(){
               type: 'POST',
               url: '/',
               data: chat,
-              success: function(data){ //do something with the data via front-end framework, so we can update in reall time
+              success: function(data){
                 console.log("Success. Reply submitted", chat);
               }
             });
@@ -90,13 +92,48 @@ $(document).ready(function(){
               console.log("Empty output detected.");
           $(".pages").fadeOut(400); // remove reply box
           $('section, #main, #top, footer').show();
-          // you need to find a way to clear the input 
+          
+          $('input').unbind("keypress.key13"); // unbind enter so that we won't have multple request sent
+          // clears the input 
+          $('input:text').focus(
+            function(){
+                $(this).val('');
+            });
         }
-      })
-
-      // later create new view @ /replys that on click of a chat displays it's replies? (no actually make it similar to this fade in thin)
-      
-      // should be similar to the like thing.
+      });
         
     });
+    $('.bubble.sender.first.animate-bottom').on('click', function(){ // hit bubble to reveal replys
+      console.log("bubble clicked.");
+      var message = $(this).find('input.hiddentag').val(); // gets the message
+      var replydate = $(this).find('input.hiddendatetag').val(); // gets the date
+      var chat = {msg: message, date: replydate};
+      console.log(chat);
+      window.location.replace("/reply?msg=${" + message + "}&date=${" + replydate + "}"); // redirect to reply page  
+    });
+    $('.bubble.recipient.first.animate-bottom').on('click', function(){ // hit bubble to reveal replys
+      console.log("bubble clicked.");
+      var message = $(this).find('input.hiddentag').val(); // gets the message
+      var replydate = $(this).find('input.hiddendatetag').val(); // gets the date
+      var chat = {msg: message, date: replydate};
+      console.log(chat);
+      window.location.replace("/reply?msg=${" + message + "}&date=${" + replydate + "}"); // redirect to reply page 
+      
+    });
 });
+
+      // now on hover of button click to view replies
+      // on click of the buttons
+        // get request to /replys
+        // send the of the message clicked
+        // print Replies of "<chat>" in last 24 hours
+            // will be printed out in chat bubble form?
+            // intially print it out in list form
+            
+      // should be similar to the like thing.
+      // after this
+        // make it such that you can use the seconds for correct placement of the chats
+        
+      // fix media querys if needed, then you are officially finished.....
+      // after that implement a better deletion algo
+          // base it on the dates that are logged in the chats not just 24 hours
