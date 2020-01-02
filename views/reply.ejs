@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Replies to .....</title>
+        <title>Replies to the chat "<%=chat[0].msg%>"</title>
         <meta charset="UTF-8">  
         <meta name="description" content="Say anything you want, how you want, whenever you want, anonymously.">
         <meta name="keywords" content="UT Austin, utwhispers,">
@@ -12,19 +12,28 @@
     <script
     src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="stylesheet" href="/assets/replystyle.css">
     <div class="formobile">
         <body>
-            <h1 style="color: white">Replies to the chat "<%=chat[0].msg%>"</h1>
-            <% if (chat[0].replies.length == 0) { %>
-                <li style="color: white">Be the first to reply to this chat</li>
-            <% } else { %>
-                <ul>
-                    <% for(var i = 0; i < chat[0].replies.length; i++) { %> <!-- earlier chats go first-->
-                        <li><%=chat[0].replies[i]%></li>
-                    <% } %>
-                </ul>     
-            <% } %>
-            <a href="/"> go back </a>
+            <div id = "top"><h1 id = "title">Replies to "<%=chat[0].msg%>"</h1></div>
+            <br> <br>
+            <section class="discussion scroll scrollbar " id="style-3">
+                        <% for(var i = 0; i < chat[0].replies.length; i++) { %> <!-- earlier chats go first-->
+                            <% if (i % 2 == 0) { %>
+                                <div class="bubble recipient first animate-bottom">
+                                    <li class = "display"><%=chat[0].replies[i]%></li>
+                                    <br>
+                                </div>
+                            <% } else { %>
+                                <div class="bubble sender first animate-bottom">
+                                    <li class = "display"><%=chat[0].replies[i]%></li>
+                                    <br>
+                                </div>
+                            <% } %>
+                        <% } %>
+            </section>
+            <br> <br>
+            <div id = "homepage"><a href="/"> Click here to go back to the homepage </a></div>
 
         </body>
     </div>

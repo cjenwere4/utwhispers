@@ -103,22 +103,29 @@ $(document).ready(function(){
       });
         
     });
-    $('.bubble.sender.first.animate-bottom').on('click', function(){ // hit bubble to reveal replys
-      console.log("bubble clicked.");
-      var message = $(this).find('input.hiddentag').val(); // gets the message
-      var replydate = $(this).find('input.hiddendatetag').val(); // gets the date
-      var chat = {msg: message, date: replydate};
-      console.log(chat);
-      window.location.replace("/reply?msg=${" + message + "}&date=${" + replydate + "}"); // redirect to reply page  
+    $('.bubble.sender.first.animate-bottom').on('click', function(e){ // hit bubble to reveal replys
+      if (!$(e.target) // get the clicked element, make sure it's not the reply button
+        .hasClass("reply") // check if any of them have the usernameInput class and return the opposite with the !
+      ) {
+        console.log("bubble clicked.");
+        var message = $(this).find('input.hiddentag').val(); // gets the message
+        var replydate = $(this).find('input.hiddendatetag').val(); // gets the date
+        var chat = {msg: message, date: replydate};
+        console.log(chat);
+        window.location.replace("/reply?msg=${" + message + "}&date=${" + replydate + "}"); // redirect to reply page 
+      } 
     });
-    $('.bubble.recipient.first.animate-bottom').on('click', function(){ // hit bubble to reveal replys
-      console.log("bubble clicked.");
-      var message = $(this).find('input.hiddentag').val(); // gets the message
-      var replydate = $(this).find('input.hiddendatetag').val(); // gets the date
-      var chat = {msg: message, date: replydate};
-      console.log(chat);
-      window.location.replace("/reply?msg=${" + message + "}&date=${" + replydate + "}"); // redirect to reply page 
-      
+    $('.bubble.recipient.first.animate-bottom').on('click', function(e){ // hit bubble to reveal replys
+      if (!$(e.target) // get the clicked element, make sure it's not the reply button
+        .hasClass("reply") // check if any of them have the usernameInput class and return the opposite with the !
+      ) {
+        console.log("bubble clicked.");
+        var message = $(this).find('input.hiddentag').val(); // gets the message
+        var replydate = $(this).find('input.hiddendatetag').val(); // gets the date
+        var chat = {msg: message, date: replydate};
+        console.log(chat);
+        window.location.replace("/reply?msg=${" + message + "}&date=${" + replydate + "}"); // redirect to reply page 
+      }
     });
 });
 

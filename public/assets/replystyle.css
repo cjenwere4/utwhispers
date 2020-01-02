@@ -1,0 +1,17 @@
+#title {
+    font-size: 30px;
+    color: white;
+}
+#homepage, #nothing {
+    text-align: center;
+}
+a {
+    color: white;
+    font-size: 13px;
+}
+
+@media only screen and (max-width: 500px) {
+    #title {
+        font-size: 25px;
+    }
+}

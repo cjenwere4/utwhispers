@@ -18,7 +18,6 @@ li {
 body {
     background-color: black;
     /* may have to get rid of this, if any problems arise */
-    overflow-y: hidden;
     overflow-x: hidden;
 }
 form{
@@ -50,22 +49,6 @@ form{
     border-radius: 20px;
     padding: 0 20px;
 }
-
-.fa{
-    box-sizing: border-box;
-    padding: 10px;
-    width: 42.5px;
-    height: 42.5px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-radius: 50%;
-    color: #07051a;
-    text-align: center;
-    font-size: 1.2em;
-    transition: all 1s;
-}
-
 form:hover{
     width: 350px;
     cursor: pointer;
@@ -236,7 +219,9 @@ span {
     font-weight: 100;
   }
   
-  
+  .reply {
+    margin: 3px;
+  }
   
   /* Media Query */
   @media only screen and (max-width: 500px) {
@@ -255,7 +240,7 @@ span {
     }
     .discussion > .bubble {
         margin: 1em;
-        max-height: 80px;
+        max-height: 150px;
         max-width: 50%;
     }
   }
