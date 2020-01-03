@@ -26,9 +26,9 @@ $(document).ready(function(){
 
   });
   $('.liked').on('click', function(){ // hit like    
-    var data = $(this).next().next().next('input').val(); // get value of likes
-    var msgdata = $(this).next().next().next().next('input').val(); //gets the message that was selected
-    var datedata = $(this).next().next().next().next().next('input').val(); // get the date val
+    var data = $(this).next().next().next().next('input').val(); // get value of likes
+    var msgdata = $(this).next().next().next().next().next('input').val(); //gets the message that was selected
+    var datedata = $(this).next().next().next().next().next().next('input').val(); // get the date val
     $(this).toggleClass('clicked');
     $(this).off("click") // Disable further clicks
     var likesno = parseInt(data);
@@ -57,8 +57,8 @@ $(document).ready(function(){
     
     $('.reply').on('click', function(){ // hit reply
       console.log("user just clicked reply button");
-      var msgdata = $(this).next().next('input').val(); //gets the message that was selected
-      var datedata = $(this).next().next().next('input').val(); // get the date val
+      var msgdata = $(this).next().next().next('input').val(); //gets the message that was selected
+      var datedata = $(this).next().next().next().next('input').val(); // get the date val
       var msg = {msg: msgdata, date: datedata};
       console.log("message replied: ", msg);
       
@@ -128,19 +128,3 @@ $(document).ready(function(){
       }
     });
 });
-
-      // now on hover of button click to view replies
-      // on click of the buttons
-        // get request to /replys
-        // send the of the message clicked
-        // print Replies of "<chat>" in last 24 hours
-            // will be printed out in chat bubble form?
-            // intially print it out in list form
-            
-      // should be similar to the like thing.
-      // after this
-        // make it such that you can use the seconds for correct placement of the chats
-        
-      // fix media querys if needed, then you are officially finished.....
-      // after that implement a better deletion algo
-          // base it on the dates that are logged in the chats not just 24 hours

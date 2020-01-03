@@ -44,8 +44,8 @@
                     <% if (i % 2 == 0) { %>
                         <div class="bubble recipient first animate-bottom">
                             <li class = "display"><%= chats[i].msg %> &nbsp; &nbsp;
-                                <i class="fas fa-heart liked" aria-hidden="true"></i> <sub><%=chats[i].likes%></sub> &nbsp;
-                                <i class="fa fa-reply reply" aria-hidden="true"></i>
+                                <i class="fas fa-heart liked" aria-hidden="true"></i> <sub><%=chats[i].likes%></sub>&nbsp;
+                                <i class="fa fa-reply reply" aria-hidden="true"></i> <sub><%=chats[i].replies.length%></sub>
                                 <input type="hidden" id = "changeit" class = "likebutton" value = "<%=chats[i].likes%>" > 
                                 <input type="hidden" class = "hiddentag" value="<%=chats[i].msg%>"> <!-- needed to get the message that was liked-->
                                 <input type="hidden" class = "hiddendatetag" value="<%=chats[i].date%>"> <!-- needed to filter messages that are the same-->
@@ -57,7 +57,7 @@
                         <div class="bubble sender first animate-bottom">
                             <li class = "display"><%= chats[i].msg %> &nbsp; &nbsp;
                                 <i class="fas fa-heart liked" aria-hidden="true"></i> <sub><%=chats[i].likes%></sub>&nbsp;
-                                <i class="fa fa-reply reply" aria-hidden="true"></i>
+                                <i class="fa fa-reply reply" aria-hidden="true"></i> <sub><%=chats[i].replies.length%></sub>
                                 <input type="hidden" id = "changeit" class = "likebutton fas fa-heart" value = "<%=chats[i].likes%>" > 
                                 <input type="hidden" class = "hiddentag" value="<%=chats[i].msg%>"> <!-- needed to get the message that was liked-->
                                 <input type="hidden" class = "hiddendatetag" value="<%=chats[i].date%>"> <!-- needed to filter messages that are the same-->

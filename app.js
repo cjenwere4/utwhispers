@@ -3,7 +3,7 @@ var bodyparser = require('body-parser');
 var mongoose = require('mongoose'); 
 var parser = require('url');
 var urlencodedParser = bodyparser.urlencoded({extended: true});
-mongoose.connect('mongodb+srv://test:021399af23@cluster0-sv63o.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://cjenwere:021399@utwhispers-j9ky1.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 var chatSchema = new mongoose.Schema({
     msg: String,
     likes: Number,
@@ -22,7 +22,7 @@ console.log("Listening to port 8081");
 app.get('/', function(req, res){ // express has extended these fucntion
     res.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict"); // get rid of annoying google message
     console.log("app.get");
-    // setInterval(deleteDailyChats, 86400000, chats); // all chats will delete after 24 hours
+    setInterval(deleteDailyChats, 86400000, chats); // all apporipiate chats will delete after 24 hours
     // deleteDailyChats(chats); //delete chats manually
     chats.find({}, function(err, data) {
         if (err) {
@@ -70,10 +70,10 @@ app.post('/', urlencodedParser, function(req, res){
         }); 
     } else if (req.body.reply !== undefined){
         // console.log("reply logged.");
-        // console.log("reply msg:" + req.body.reply);
+        // console.log(req.body.date);
         chats.find({msg: req.body.msg, date: req.body.date}, function(err, data) { // find liked post
             if (err) throw err; // crash
-            // find current likes
+            // find current likes            
             var replyarray = data[0].replies; // leave the [0] for now
             replyarray[replyarray.length] = req.body.reply;
             console.log("length of array: " + replyarray.length);
@@ -106,11 +106,19 @@ app.get('/reply', function(req, res){
         res.render('reply', {chat: data});
     })
 })
+
 function deleteDailyChats(chats) {
-    console.log("Chats just deleted.");
-    chats.deleteMany({}, function (err) {
-        console.log('error');
-        if (err) throw err
-    }); 
-    
+    var d = new Date();
+    var yesterday = d.setDate(d.getDate() - 1);
+    var date = new Date(yesterday);
+    date = date.toLocaleString();
+    date = date.substr(0, 3);
+    console.log("Yesterday's date: ", date);
+    chats.deleteMany({date: {"$regex": date}}, function(err, data) { // find liked post
+        console.log(data);
+        if (err) {
+            console.log("Error: No chats to delete.");
+            throw err;
+        }
+    });
 }
