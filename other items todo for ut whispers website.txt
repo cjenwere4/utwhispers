@@ -1,0 +1,15 @@
+Immediate
+- [] buy the utwhispers.com and host it like how you did .me (link in bookmarks)
+- [] automoderator for posts.
+- [] try to make messages appear in realtime (so probably peresistent connection from mongodb) (we need socket.io)
+
+Later: 
+- [] add extra field for seconds to display chats that are submitted during a certain time window to be displayed on same side
+- [] hover of text boxes reveal likes and replys
+- [] maybe add an avatar phone on each bubble?
+- [] try to fix bug in which the i tag it's componet kinda leak over??? (not anything to big)
+- [] downvote system????
+- [] random color chats
+- [] add real time count of characters left
+- [] on scroll effects
+- [] add animation to the bubbles (hover effects, etc, etc); 
