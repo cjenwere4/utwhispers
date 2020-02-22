@@ -18,13 +18,14 @@ var chatSchema = new mongoose.Schema({
     replies: Array
 });
 var chats = mongoose.model('Chat', chatSchema);
+var port = process.env.PORT || 8081;
 mongoose.set('useFindAndModify', false);
 // set up an express app, gives us all functions of express
 var app = express();
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
-app.listen(8081);
-console.log("Listening to port 8081");
+app.listen(port);
+console.log("Listening to port" + port);
 app.get('/', function(req, res){ // express has extended these fucntion
     res.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict"); // get rid of annoying google message
     console.log("app.get");
