@@ -244,17 +244,3 @@ span {
         max-width: 50%;
     }
   }
-  @media (any-hover: hover) {
-    form:hover{
-        width: 350px;
-        cursor: pointer;
-    }
-    form:hover #changelater{ 
-        display: block;
-    }
-    
-    form:hover .fa{
-        background: #07051a;
-        color: white;
-    }
-}
