@@ -5,10 +5,10 @@ var parser = require('url');
 var urlencodedParser = bodyparser.urlencoded({extended: true});
 
 //Below LOC is the real database, use for reference only
-// mongoose.connect('mongodb+srv://cjenwere:021399@utwhispers-j9ky1.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://cjenwere:021399@utwhispers-j9ky1.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 
 // Below LOC is the test database, use this at all times.
-mongoose.connect('mongodb+srv://test:021399af23@cluster0-sv63o.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+// mongoose.connect('mongodb+srv://test:021399af23@cluster0-sv63o.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 
 var chatSchema = new mongoose.Schema({
     msg: String,
